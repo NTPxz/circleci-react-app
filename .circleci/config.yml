@@ -1,20 +1,17 @@
 version: 2.1
 
 orbs:
-  node: circleci/node@5.0.3
+  gh-pages: sugarshin/gh-pages@x.y.z
 jobs:
-  install-and-test:
-    executor:
-      name: node/default
-      tag: "16.17"
+  build_deploy:
+    executor: gh-pages/default
     steps:
       - checkout
-      - node/install-packages
-      - run:
-          command: npm run test
-          name: Run npm tests
-
+      - run: ./build.sh
+      - gh-pages/deploy:
+          setup-git: true
+          ssh-fingerprints: <fingerprint>
 workflows:
-  test_my_app:
+  Build and Deploy:
     jobs:
-      - install-and-test
+      - build_deploy
