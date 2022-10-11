@@ -1,5 +1,4 @@
 version: 2.1
-
 orbs:
   gh-pages: sugarshin/gh-pages@1.0.1
 jobs:
